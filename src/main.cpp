@@ -17,9 +17,11 @@ int main(int argc, char **argv){
 
         chip8.emulateCycle();
 
-        if(chip8.drawFlag)
+        if(chip8.drawFlag){
             //drawGraphics();
+        }
 
+        Chip8.setKeys();
     }
 
 }
