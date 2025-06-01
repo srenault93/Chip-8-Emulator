@@ -6,6 +6,11 @@ Chip8::Chip8() {
 Chip8::~Chip8() {
 }
 
+bool Chip8::loadRom(const char* file) {
+    
+}
+
+
 void Chip8::initialize(){
     //Reset//
     program_Counter = 0x200;
