@@ -31,7 +31,6 @@ bool Chip8::loadRom(const char* file) {
     rom.read(reinterpret_cast<char*>(memory + 0x200), size);
 
     
-    
     rom.close();
     return true;
 
