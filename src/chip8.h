@@ -2,6 +2,8 @@
 #define CHIP8_H
 #include <cstdint>
 #include <SDL2/SDL.h>
+#include <fstream>
+#include <iostream>
 
 class Chip8 {
     public:
