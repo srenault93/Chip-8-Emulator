@@ -1,5 +1,5 @@
 #include <SDL2/SDL.h>
-#include "chip8.hpp"
+#include "chip8.h"
 
 Chip8 chip8;
 

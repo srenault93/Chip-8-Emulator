@@ -1,5 +1,5 @@
-#ifndef CHIP8_HPP
-#define CHIP8_HPP
+#ifndef CHIP8_H
+#define CHIP8_H
 #include <cstdint>
 #include <SDL2/SDL.h>
 
@@ -15,7 +15,6 @@ class Chip8 {
     void handleInput  (); // Process key input
     void updateTimer  (); 
     void initialize   ();
-    
 
 
     private:
@@ -55,7 +54,7 @@ class Chip8 {
     unsigned char key[16];
 
 
-}
+};
 
 
 #endif

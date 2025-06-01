@@ -21,3 +21,4 @@ void Chip8::initialize(){
         //memory[i] = chip8_fontset[i];
     }
 }
+
