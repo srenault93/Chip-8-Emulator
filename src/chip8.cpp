@@ -6,6 +6,11 @@ Chip8::Chip8() {
 Chip8::~Chip8() {
 }
 
+
+unsigned short Chip8::get_pc_counter(){
+    return Chip8::program_Counter;
+}
+
 bool Chip8::loadRom(const char* file) {
     
     //open ROM in binary mode

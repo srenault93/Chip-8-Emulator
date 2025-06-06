@@ -17,7 +17,7 @@ class Chip8 {
     void handleInput  (); // Process key input
     void updateTimer  (); 
     void initialize   ();
-
+    unsigned short get_pc_counter();
 
     private:
 
