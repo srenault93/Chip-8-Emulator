@@ -13,16 +13,15 @@ unsigned short Chip8::get_pc_counter(){
 
 bool Chip8::loadRom(const char* file) {
     
-    //open ROM in binary mode
     std::ifstream rom(file, std::ios::binary | std::ios::ate);
     if (!rom.is_open()){
         std::cerr << "Error: Failure to open ROM" << file << std::endl;
         return false;
     } 
 
-    //Get file size
+    
     std::streamsize size = rom.tellg();
-    //checks if size is larger than Max size
+
     if (size > 4096 - 0x200){
         std::cerr << "Error: File too large";
         rom.close();
@@ -32,7 +31,7 @@ bool Chip8::loadRom(const char* file) {
     //set pointer back to start of file
     rom.seekg(0, std::ios::beg);
     
-    //put rom into memory
+    
     rom.read(reinterpret_cast<char*>(memory + 0x200), size);
 
     
@@ -43,18 +42,21 @@ bool Chip8::loadRom(const char* file) {
 
 
 void Chip8::initialize(){
-    //Reset//
+
     program_Counter = 0x200;
     opcode          = 0;    
     index_Register  = 0;
     stack_pointer   = 0;
-    
-    //TODO//
-    //Clear display, stack registers V0-VF, and memory
+    delay_timer     = 0;
+    sound_timer     = 0;
 
-    //Load fontset
-    for (int i = 0; i < 80; ++i){
-        //memory[i] = chip8_fontset[i];
-    }
+
+    for (int i = 0; i < 64 * 32; ++i) {gfx[i] = 0;}
+    
+    for (int i = 0; i < 4096; ++i)    {CPU_Registers[i] = 0; key[i] = 0;}
+
+    for (int i = 0; i < 4096; ++i)    {memory[i] = 0;}
+
+    for (int i = 0; i < 80; ++i)      {memory[i + 0x50] = chip8_fontset[i]}
 }
 
