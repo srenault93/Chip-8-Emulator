@@ -57,6 +57,6 @@ void Chip8::initialize(){
 
     for (int i = 0; i < 4096; ++i)    {memory[i] = 0;}
 
-    for (int i = 0; i < 80; ++i)      {memory[i + 0x50] = chip8_fontset[i]}
+    for (int i = 0; i < 80; ++i)      {memory[i + 0x50] = chip8_fontset[i];}
 }
 

@@ -13,19 +13,19 @@ bool init_SDL(sdl_t *sdl){
     
     
     if ((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0)){
-        SDL_Log("Error initializing SDL", SDL_GetError());
+        SDL_Log(SDL_GetError());
         return false;
     }
 
     sdl -> window = SDL_CreateWindow("CHIP8", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-                                    64, 32, 0);
+                                    500, 500, 0);
     
     
-    if (!sdl -> window) {SDL_Log("Error creating SDL window", SDL_GetError()); return false;}    
+    if (!sdl -> window) {SDL_Log(SDL_GetError()); return false;}    
     
 
     sdl -> renderer = SDL_CreateRenderer(sdl->window, -1, SDL_RENDERER_ACCELERATED);
-    if (!sdl -> renderer) {SDL_Log("Error creating SDL renderer", SDL_GetError()); return false;}
+    if (!sdl -> renderer) {SDL_Log(SDL_GetError()); return false;}
           
 
     return true;
@@ -63,6 +63,6 @@ int main(int argc, char **argv){
     }
 
 
-    cleanup();
+    cleanup(sdl);
 
 }
