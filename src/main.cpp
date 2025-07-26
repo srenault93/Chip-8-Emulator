@@ -1,52 +1,66 @@
 #include "SDL2/SDL.h"
 #include "chip8.h"
+
+
 typedef struct{
-    Chip8 chip8;
     SDL_Window *window;
-} sdl_T;
+    SDL_Renderer *renderer;
+} sdl_t;
 
 
 
-bool init_SDL(){
+bool init_SDL(sdl_t *sdl){
+    
+    
     if ((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0)){
         SDL_Log("Error initializing SDL", SDL_GetError());
         return false;
     }
 
+    sdl -> window = SDL_CreateWindow("CHIP8", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
+                                    64, 32, 0);
+    
+    
+    if (!sdl -> window) {SDL_Log("Error creating SDL window", SDL_GetError()); return false;}    
+    
+
+    sdl -> renderer = SDL_CreateRenderer(sdl->window, -1, SDL_RENDERER_ACCELERATED);
+    if (!sdl -> renderer) {SDL_Log("Error creating SDL renderer", SDL_GetError()); return false;}
+          
+
     return true;
 }
 
-void cleanup(){
-    SDL_DestroyWindow(window);
+void cleanup(const sdl_t sdl){
+    SDL_DestroyRenderer(sdl.renderer);
+    SDL_DestroyWindow(sdl.window);
     SDL_Quit();
+}
+
+void clear_display(const sdl_t sdl) {
+     SDL_SetRenderDrawColor(sdl.renderer, 0, 0, 0, 0);
+     SDL_RenderClear(sdl.renderer);
+
+}
+
+void update_display(const sdl_t sdl){
+    SDL_RenderPresent(sdl.renderer);
 }
 
 
 int main(int argc, char **argv){
 
-    if (!init_SDL()) exit(EXIT_FAILURE);
-    
+    sdl_t sdl = {0};
+    if (!init_SDL(&sdl)) exit(EXIT_FAILURE);
 
-    
-    
-    //setUpGraphics();
-    //setUpInput();
 
-    //Initialize the chip8 and load rom
-    //chip8.initialize();
-    //chip8.loadRom("example");
+    while (true){
+        
+        
+        SDL_Delay(16);
 
-    //Emulation loop
-    //for(;;){
-
-        //chip8.emulateCycle();
-
-        //if(chip8.drawFlag){
-            //drawGraphics();
-        //}
-
-        //Chip8.setKeys();
-    //}
+        update_display(sdl);
+    }
 
 
     cleanup();
