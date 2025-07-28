@@ -62,8 +62,8 @@ void inputs(Chip8 &chip8){
                 switch (event.key.keysym.sym){
                     case SDLK_ESCAPE:
                     chip8.state = Chip8::QUIT;
-                    chip8.state = Chip8::QUIT;
                 }
+                break;
         }
     }
 
@@ -82,10 +82,9 @@ int main(int argc, char **argv){
     while (chip8.state != Chip8::QUIT){
         
         inputs(chip8);
-
-        SDL_Delay(16);
-
+        clear_display(sdl)
         update_display(sdl);
+        SDL_Delay(16);
     
     
     }

@@ -8,7 +8,7 @@ Chip8::~Chip8() {
 
 
 unsigned short Chip8::get_pc_counter(){
-    return Chip8::program_Counter;
+    return program_Counter;
 }
 
 bool Chip8::loadRom(const char* file) {
@@ -54,7 +54,7 @@ void Chip8::initialize(){
 
     for ( int i = 0; i < 64 * 32; ++i ) { gfx[i] = 0; }
     
-    for ( int i = 0; i < 4096; ++i )    { CPU_Registers[i] = 0; key[i] = 0; } 
+    for ( int i = 0; i < 16; ++i )    { CPU_Registers[i] = 0; key[i] = 0; } 
 
     for ( int i = 0; i < 4096; ++i )    { memory[i] = 0; }
 
