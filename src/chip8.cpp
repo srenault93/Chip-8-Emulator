@@ -49,14 +49,15 @@ void Chip8::initialize(){
     stack_pointer   = 0;
     delay_timer     = 0;
     sound_timer     = 0;
+    state           = RUNNING;
 
 
-    for (int i = 0; i < 64 * 32; ++i) {gfx[i] = 0;}
+    for ( int i = 0; i < 64 * 32; ++i ) { gfx[i] = 0; }
     
-    for (int i = 0; i < 4096; ++i)    {CPU_Registers[i] = 0; key[i] = 0;}
+    for ( int i = 0; i < 4096; ++i )    { CPU_Registers[i] = 0; key[i] = 0; } 
 
-    for (int i = 0; i < 4096; ++i)    {memory[i] = 0;}
+    for ( int i = 0; i < 4096; ++i )    { memory[i] = 0; }
 
-    for (int i = 0; i < 80; ++i)      {memory[i + 0x50] = chip8_fontset[i];}
+    for ( int i = 0; i < 80; ++i )      { memory[i + 0x50] = chip8_fontset[i]; }
 }
 

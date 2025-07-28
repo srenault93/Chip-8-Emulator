@@ -19,6 +19,13 @@ class Chip8 {
     void initialize   ();
     unsigned short get_pc_counter();
 
+    enum emu_state {
+        QUIT,
+        RUNNING
+    };
+
+    emu_state state;
+
     private:
 
     unsigned short opcode;

@@ -9,9 +9,12 @@ typedef struct{
 
 
 
+
 bool init_SDL(sdl_t *sdl){
     
+     
     
+ 
     if ((SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0)){
         SDL_Log(SDL_GetError());
         return false;
@@ -47,19 +50,43 @@ void update_display(const sdl_t sdl){
     SDL_RenderPresent(sdl.renderer);
 }
 
+void inputs(Chip8 &chip8){
+    SDL_Event event;
+
+    while (SDL_PollEvent(&event)){
+        switch(event.type){
+            case SDL_QUIT:
+                chip8.state = Chip8::QUIT;
+                break;
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym){
+                    case SDLK_ESCAPE:
+                    chip8.state = Chip8::QUIT;
+                }
+        }
+    }
+
+}
 
 int main(int argc, char **argv){
 
+    Chip8 chip8;
+    chip8.initialize();
+
     sdl_t sdl = {0};
+    
     if (!init_SDL(&sdl)) exit(EXIT_FAILURE);
 
 
-    while (true){
+    while (chip8.state != Chip8::QUIT){
         
-        
+        inputs(chip8);
+
         SDL_Delay(16);
 
         update_display(sdl);
+    
+    
     }
 
 
