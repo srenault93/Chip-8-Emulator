@@ -62,14 +62,15 @@ void inputs(Chip8 &chip8){
                 switch (event.key.keysym.sym){
                     case SDLK_ESCAPE:
                     chip8.state = Chip8::QUIT;
+                    chip8.state = Chip8::QUIT;
                 }
         }
     }
 
 }
 
-int main(int argc, char **argv){
 
+int main(int argc, char **argv){
     Chip8 chip8;
     chip8.initialize();
 
