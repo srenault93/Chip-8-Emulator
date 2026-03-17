@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 
+class OpcodeHandler; // Forward declaration
+
 class Chip8 {
     public:
 
@@ -25,12 +27,15 @@ class Chip8 {
     };
 
     emu_state state;
+    bool draw_flag; // Set true when DXYN executes; cleared after render
 
     private:
 
+    friend class OpcodeHandler; // Allow full access to private state
+
     unsigned short opcode;
     
-    unsigned char CPU_Registers[16];//V0, V1,...,VE 16th reg is the carry flag
+    unsigned char CPU_Registers[16]; // V0-VF; VF is carry/flag register
 
     unsigned short index_Register;
 
@@ -38,30 +43,24 @@ class Chip8 {
 
     //Memory map//
     //0x000-01FF - Chip 8 interpreter
-    //0x050-0x0A0 Used for the 4x5 font set (0-f)
-    //0x200-oxFFF - Program ROM and work RAM
+    //0x050-0x0A0 Used for the 4x5 font set (0-F)
+    //0x200-0xFFF - Program ROM and work RAM
     unsigned char memory[4096];
 
     //Timer registers//
     //When set above 0 they will count down to 0
-
     unsigned char delay_timer;
-
     unsigned char sound_timer;
 
-    //Graphics system 2048 pixels
+    //Graphics system: 64x32 pixels, each byte is 0 (off) or 1 (on)
     unsigned char gfx[64 * 32];
     
-    //Stack//
-    //Used to remember current locaton before a jump is performed
-    //MUST BE CALLED before any jump or subroutine!!
-
+    //Stack: used to remember PC before a jump/subroutine
     unsigned short stack[16];
     unsigned short stack_pointer;
     
-    //Hex based keypad (0x0-0-F) used to story current state of key
+    //Hex keypad 0x0-0xF: 1 = pressed, 0 = released
     unsigned char key[16];
-
 
     unsigned char chip8_fontset[80] =
     { 
@@ -82,7 +81,6 @@ class Chip8 {
     0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
     0xF0, 0x80, 0xF0, 0x80, 0x80  // F
     };
-
 };
 
 

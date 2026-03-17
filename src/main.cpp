@@ -82,7 +82,7 @@ int main(int argc, char **argv){
     while (chip8.state != Chip8::QUIT){
         
         inputs(chip8);
-        clear_display(sdl)
+        clear_display(sdl);
         update_display(sdl);
         SDL_Delay(16);
     

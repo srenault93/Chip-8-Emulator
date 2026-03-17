@@ -14,7 +14,7 @@ INCLUDES = `pkg-config --cflags sdl2`
 TARGET = CHIP-8-EMULATOR
 
 # Source files 
-SOURCES = main.cpp chip8.cpp
+SOURCES = main.cpp chip8.cpp opcodes.cpp
 
 # Object files (generated from source files)
 OBJECTS = $(SOURCES:.cpp=.o)
