@@ -29,6 +29,11 @@ class Chip8 {
     emu_state state;
     bool draw_flag; // Set true when DXYN executes; cleared after render
 
+    // Accessors used by main.cpp for render and input
+    bool get_pixel(int x, int y)  const { return gfx[y * 64 + x] != 0; }
+    bool get_key  (int key_index) const { return key[key_index] != 0; }
+    void set_key  (int key_index, bool pressed) { key[key_index] = pressed ? 1 : 0; }
+
     private:
 
     friend class OpcodeHandler; // Allow full access to private state
@@ -84,4 +89,4 @@ class Chip8 {
 };
 
 
-#endif
+#endif 
