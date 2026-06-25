@@ -5,6 +5,12 @@ A CHIP-8 interpreter written in C++ with an SDL2 front-end. It runs the classic
 catalogue) and renders them with a green-phosphor look, an on-screen keypad, and
 a small status bar.
 
+## Demo
+
+![CHIP-8 emulator running Space Invaders](media/demo.gif)
+
+![Test ROM rendered in the emulator](media/testrom.png)
+
 ## What it does
 
 - A fetch/decode/execute loop covering the full standard CHIP-8 opcode set
